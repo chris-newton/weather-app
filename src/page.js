@@ -15,13 +15,14 @@ class Page {
         const obj = processJson(json);
     
         console.log(json);
-
+        
         return obj;
     }
 
     async setData() {
         this.usObj = await this.loadData("us");
         this.metricObj = await this.loadData("metric");
+
     }
 
     getDataObj() {

@@ -1,13 +1,13 @@
 function processJson(dataJson) {
     let data = {};
     
-    // today
     data.address = dataJson.resolvedAddress;
     data.datetime = dataJson.currentConditions.datetime;
 
     data.sunrise = dataJson.currentConditions.sunrise;
     data.sunset = dataJson.currentConditions.sunset;
-  
+ 
+    // today data
     data.icon = dataJson.currentConditions.icon;
     data.temp = dataJson.currentConditions.temp;
     data.feelslike = dataJson.currentConditions.feelslike;
@@ -17,9 +17,10 @@ function processJson(dataJson) {
     data.precipprob = dataJson.currentConditions.precipprob;
     data.preciptype = dataJson.currentConditions.preciptype;
     data.uvindex = dataJson.currentConditions.uvindex;
-
-    console.log(data.feelslike);
-    // next 15 days
+    data.winddir = dataJson.currentConditions.winddir;
+    data.windspeed = dataJson.currentConditions.windspeed;
+    data.visibility = dataJson.currentConditions.visibility;
+    // next 15 days data
     data.days = dataJson.days.map((day) => processDay(day));
 
     return data;
