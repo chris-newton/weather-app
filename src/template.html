@@ -12,20 +12,32 @@
     
     <body>
         <div id="header">
+            <a href=""><img id="home-icon" src="../assets/icons/home-icon.svg"></a>
+            
             <form id="searchbox">
-                <input type="text" name="location" placeholder="search location" autocomplete="off" required>
+                <input type="text" name="location" placeholder="search location" autocomplete="off" required="">
                 <button id="location-submit" type="submit">
                     <img src="../assets/svg/magnify.svg" alt="">
                 </button>
             </form>
 
-            <button id="unit-switch">toggle unit</button>
+            <div class="button b2" id="button-10">
+                <input type="checkbox" class="checkbox" id="unit-toggle">
+                <div class="knobs">
+                    <span>°F</span>
+                </div>
+                <div class="layer"></div>
+            </div>
         </div>
 
         <main>
             <div id="main-container"></div>
         </main>
 
-        <div id="footer"></div>
+        <div id="footer">
+            <span>Crafted by 
+                <a href="https://github.com/chris-newton">Chris Newton</a>
+            </span>
+        </div>
     </body>
 </html>

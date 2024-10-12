@@ -1,10 +1,7 @@
 import cloudy from '../assets/svg/cloudy.svg';
 import rainy from '../assets/svg/rainy.svg';
 import sunny from '../assets/svg/sunny.svg'
-import thunderstorm from '../assets/svg/thunderstorm.svg';
-
 import arrow_up from '../assets/svg/arrow-up-svgrepo-com.svg';
-
 import arrow_right_up from '../assets/svg/arrow-right-up-svgrepo-com.svg';
 import arrow_right from '../assets/svg/arrow-right-svgrepo-com.svg';
 import arrow_right_down from '../assets/svg/arrow-right-down-svgrepo-com.svg';
@@ -84,4 +81,22 @@ function getWindDirectionUrl(winddir) {
     return url;
 }
 
-export { formatTime, getConditionsUrl, getWindDirectionUrl };
+// returns the day of the week (string) of a datetime (YYYY-MM-DD) 
+function getDayOfWeek(date) {
+    const dayIndex = new Date(date).getDay();    
+    return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex];
+}
+
+function formatDate(date) {
+    const month = new Date(date).getMonth();
+    const day = new Date(date).getDate();
+
+    return (month+1) + "/" + day;
+}
+
+function getMonthString(monthIndex) {
+    return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December'][monthIndex];
+}
+
+export { formatTime, getConditionsUrl, getWindDirectionUrl, getDayOfWeek, formatDate, getMonthString };

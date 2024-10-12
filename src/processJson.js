@@ -21,16 +21,18 @@ function processJson(dataJson) {
     data.windspeed = dataJson.currentConditions.windspeed;
     data.visibility = dataJson.currentConditions.visibility;
     // next 15 days data
-    data.days = dataJson.days.map((day) => processDay(day));
+    data.days = dataJson.days.slice(2).map((day) => processDay(day));
 
     return data;
 }
 
 function processDay(day) {
     const reduced = {};
+    reduced.datetime = day.datetime;
     reduced.conditions = day.conditions;
     reduced.tempmin = day.tempmin;
     reduced.tempmax = day.tempmax;
+    reduced.icon = day.icon;
     return reduced;
 }
 

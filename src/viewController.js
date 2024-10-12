@@ -1,5 +1,6 @@
 import { page } from './page.js';
-import { formatTime, getConditionsUrl, getWindDirectionUrl } from './util.js';
+import { formatTime, getConditionsUrl, getWindDirectionUrl, getDayOfWeek, 
+    formatDate, getMonthString } from './util.js';
 
 function drawContent() {
     const dataObj = page.getDataObj(); 
@@ -17,16 +18,20 @@ function drawContent() {
     mainContainer.append(header, main, details, days);
 }
 
-function drawHeader(address, time24hr) {
+function drawHeader(address, date) {
     const header = document.createElement("div");
     header.className = "content-header";
 
     const location = document.createElement("h1");
     location.className = "location";
     location.textContent = address;
+
     const time = document.createElement("h3");
     time.classList.add("date-time", "secondary-text");
-    time.textContent = formatTime(time24hr);
+
+    const today = new Date();
+    time.textContent = formatTime(date) + "  |  " + getMonthString(today.getMonth()) +
+        " " + today.getDate() + ", " + today.getFullYear();
 
     header.append(location, time);
 
@@ -141,13 +146,57 @@ function drawDays(dataObj) {
     const days = document.createElement("div");
     days.className = "content-days";
 
+    dataObj.days.forEach((day) => {
+        console.log(day);
+        const dayCard = document.createElement("div");
+        dayCard.className = "day-card";
+
+        const dayOfWeek = document.createElement("h2");
+        dayOfWeek.textContent = getDayOfWeek(day.datetime);
+
+        const date = document.createElement("h3");
+        date.textContent = formatDate(day.datetime);
+        
+        const separator = document.createElement("div");
+        separator.className = "separator";
+
+        const conditions = document.createElement("h4");
+        conditions.textContent = day.conditions;
+     
+        const tempmax = document.createElement("div");
+        const tempmaxLabel = document.createElement("h4");
+        tempmaxLabel.textContent = "H: ";
+        tempmaxLabel.className = "tempLabel";
+        const tempmaxVal = document.createElement("h4");
+        tempmaxVal.className = "tempVal";
+        tempmaxVal.textContent =  day.tempmax + 
+        (page.unitSystem === "us" ? "°F" : "°C");
+        tempmax.append(tempmaxLabel, tempmaxVal);
+        
+        const tempmin = document.createElement("div");
+        const tempminLabel = document.createElement("h4");
+        tempminLabel.textContent = "L: ";
+        tempminLabel.className = "tempLabel";
+        const tempminVal = document.createElement("h4");
+        tempminVal.className = "tempVal";
+        tempminVal.textContent =  day.tempmin + 
+        (page.unitSystem === "us" ? "°F" : "°C");
+        tempmin.append(tempminLabel, tempminVal);
+
+        const conditionsIcon = document.createElement("img");
+        conditionsIcon.src = getConditionsUrl(day.icon);
+
+        const dayDetails = document.createElement("div");
+        dayDetails.className = "day-details";
+
+        dayDetails.append(conditionsIcon, tempmax, tempmin);
+
+        dayCard.append(dayOfWeek, date, separator, conditions, dayDetails);
+
+        days.append(dayCard);
+    });
+
     return days;
 }
 
-
-function toggleUnitSwitch() {
-    const unitToggle = document.querySelector("#unit-switch");
-    unitToggle.classList.toggle("switch-on");
-}
-
-export { drawContent, toggleUnitSwitch };
+export { drawContent };

@@ -1,5 +1,5 @@
 import { page } from './page.js';
-import { toggleUnitSwitch, drawContent } from './viewController.js';
+import { drawContent } from './viewController.js';
 
 import './style.css';
 
@@ -23,10 +23,10 @@ searchbox.addEventListener("submit", async (e) => {
 // toggle C / F button
 // updates Page object
 // swaps data content units
-const unitToggle = document.querySelector("#unit-switch");
-unitToggle.addEventListener("click", () => {
+const unitToggle = document.querySelector("#unit-toggle");
+unitToggle.addEventListener("change", () => {
+    console.log("toggled")
     page.toggleUnitSystem(); // update model
 
-    toggleUnitSwitch(); // 
-    drawContent();      // update view
+    drawContent();     // update view
 });

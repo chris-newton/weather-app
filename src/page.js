@@ -13,8 +13,6 @@ class Page {
     async loadData(unitSystem) {
         const json = await getWeather(this.location, unitSystem);
         const obj = processJson(json);
-    
-        console.log(json);
         
         return obj;
     }
