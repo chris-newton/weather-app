@@ -6,4 +6,4 @@ view today's weather details, and scroll through the 15 day forecast. Dynamicall
 graphical icons for weather conditions and wind direction. Supports toggling between 
 Fahrenheit and Celsius units.
 
-(https://chris-newton.github.io/weather-app/)[hosted right here]
+[hosted right here](https://chris-newton.github.io/weather-app/)
